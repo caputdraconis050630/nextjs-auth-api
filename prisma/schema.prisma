@@ -4,12 +4,12 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
+  url      = "mysql://root@localhost:3306/test"
 }
 
 model user {
   id       Int    @id @default(autoincrement())
   nickname String
-  userid   String
+  userid   String @unique
   password String
 }

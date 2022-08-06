@@ -31,7 +31,7 @@ export default function Register() {
             maxLength={20}
           />
         </Form.Field>
-        <Button color="blue">Login</Button>
+        <Button color="blue">Register</Button>
       </Form>
     </div>
   );

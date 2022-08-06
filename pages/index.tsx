@@ -9,30 +9,19 @@ import {
   Segment,
 } from "semantic-ui-react";
 
-export default function Login() {
+export default function Home() {
   return (
     <div style={{ padding: "100px 0", textAlign: "center" }}>
-      <Form action="api/auth/login" method="POST">
-        <Form.Field inline>
-          <input placeholder="ID" name="userid" required={true} />
-        </Form.Field>
-        <Form.Field inline>
-          <input
-            placeholder="Password"
-            name="password"
-            required={true}
-            maxLength={20}
-          />
-        </Form.Field>
-        <Button color="blue" type="submit">
-          Login
-        </Button>
-        <Link href="/register">
-          <Button color="blue" type="submit">
-            Register
-          </Button>
-        </Link>
-      </Form>
+      <Header size="huge">HOME</Header>
+      <Link href="/login">
+        <Button primary>Login</Button>
+      </Link>
+      <Link href="/register">
+        <Button primary>Register</Button>
+      </Link>
+      <Link href="/api/users">
+        <Button primary>Users</Button>
+      </Link>
     </div>
   );
 }
