@@ -22,6 +22,7 @@ export default function Login() {
             name="password"
             required={true}
             maxLength={20}
+            type="password"
           />
         </Form.Field>
         <Button color="blue" type="submit">

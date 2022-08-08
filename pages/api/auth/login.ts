@@ -47,7 +47,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       )
 
       res.statusCode = 200
-      return res.send(user)
+      return res.redirect("/").send(user)
     // return res
     //   .status(200)
     //   .json({ login: true, message: "로그인 되었습니다 :)" });

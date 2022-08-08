@@ -13,7 +13,7 @@ export default function Logout(req: NextApiRequest, res: NextApiResponse) {
         "access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; Httponly",
       )
       res.statusCode = 204
-      return res.end()
+      return res.redirect("/").end()
     default:
       return res.status(405).end(`Method ${req.method} Is Not Allowed.`)
   }

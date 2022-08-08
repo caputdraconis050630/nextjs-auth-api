@@ -21,6 +21,7 @@ export default function Register() {
             name="password"
             required={true}
             maxLength={20}
+            type="password"
           />
         </Form.Field>
         <Form.Field inline>
@@ -29,6 +30,7 @@ export default function Register() {
             name="password_r"
             required={true}
             maxLength={20}
+            type="password"
           />
         </Form.Field>
         <Button color="blue">Register</Button>

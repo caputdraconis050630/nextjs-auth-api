@@ -33,7 +33,10 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
           userid: userId as string,
         },
       })
-      return res.status(200).end("Nickname has changed successfully")
+      return res
+        .status(200)
+        .redirect("/")
+        .end("Nickname has changed successfully")
     default:
       // api/users/[userId]에 GET, POST가 아닌 다른 방식으로는 접근 불가능
       return res.status(405).end(`Method ${req.method} Is Not Allowed.`)

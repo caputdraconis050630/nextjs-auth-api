@@ -1,13 +1,13 @@
-import pc from "../../../lib/backend/prismaClient"; // From PIE
-import { NextApiRequest, NextApiResponse } from "next";
-import * as yup from "yup";
+import pc from "../../../lib/backend/prismaClient" // From PIE
+import { NextApiRequest, NextApiResponse } from "next"
+import * as yup from "yup"
 
 export type RegisterUser = {
-  userid: string;
-  nickname: string;
-  password: string;
-  password_r: string;
-};
+  userid: string
+  nickname: string
+  password: string
+  password_r: string
+}
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {
@@ -19,14 +19,14 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       //   password: req.body.password,
       // };
       // 유효성 검사
-      const formdata: RegisterUser = await validateRegisterUserBody(req.body);
+      const formdata: RegisterUser = await validateRegisterUserBody(req.body)
 
       if (formdata.password !== formdata.password_r) {
         res.status(400).json({
           register: false,
           message: "비밀번호를 동일하게 입력해주세요 :(",
-        });
-        return;
+        })
+        return
       }
       await pc.user.create({
         data: {
@@ -34,16 +34,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           nickname: formdata.nickname,
           password: formdata.password,
         },
-      });
+      })
       return res
         .status(200)
-        .json({ register: true, message: "회원가입이 완료되었습니다." });
+        .redirect("/auth/login/")
+        .json({ register: true, message: "회원가입이 완료되었습니다." })
 
     default:
       // api/register에 POST가 아닌 방식으로는 접근 불가능
-      return res.status(405).end(`Method ${req.method} Is Not Allowed.`);
+      return res.status(405).end(`Method ${req.method} Is Not Allowed.`)
   }
-};
+}
 
 async function validateRegisterUserBody(body: any): Promise<RegisterUser> {
   return await yup
@@ -53,5 +54,5 @@ async function validateRegisterUserBody(body: any): Promise<RegisterUser> {
       password: yup.string().max(20).required(),
       password_r: yup.string().max(20).required(),
     })
-    .validate(body);
+    .validate(body)
 }
