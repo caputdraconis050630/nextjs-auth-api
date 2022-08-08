@@ -8,52 +8,49 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react"
-import login from "./api/auth/login"
 import { GetServerSideProps } from "next"
 
-type UserData = {
+type MyPageData = {
+  userid: string
   nickname: string
   isLoggedIn: Boolean
 }
 
-export default function Home({ nickname, isLoggedIn }: UserData) {
+export default function Mypage({ userid, nickname, isLoggedIn }: MyPageData) {
   if (!isLoggedIn) {
     return (
       <div style={{ padding: "100px 0", textAlign: "center" }}>
-        <Header size="huge">HOME</Header>
+        <Header size="huge">Login is Needed</Header>
         <Link href="/auth/login">
-          <Button primary>Login</Button>
-        </Link>
-        <Link href="/auth/register">
-          <Button primary>Register</Button>
+          <Button primary>To Login Page</Button>
         </Link>
       </div>
     )
   } else {
     return (
       <div style={{ padding: "100px 0", textAlign: "center" }}>
-        <Header size="huge">Hi {nickname} :)</Header>
-        <Link href="/auth/logout">
-          <Button primary>Logout</Button>
+        <Header size="huge">This Is {nickname}'s Page' :)</Header>
+        <Segment>userid : {userid}</Segment>
+        <Segment>nickname : {nickname}</Segment>
+        <Link href="/users/change_nickname">
+          <Button primary>Change Nickname</Button>
         </Link>
-        <Link href="/users/mypage">
-          <Button primary>My page</Button>
-        </Link>
-        <Link href="/api/users/">
-          <Button primary>Users</Button>
+        <Link href="/">
+          <Button primary>Home</Button>
         </Link>
       </div>
     )
   }
 }
 
-export const getServerSideProps: GetServerSideProps<UserData> = async (
+export const getServerSideProps: GetServerSideProps<MyPageData> = async (
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   context,
 ) => {
   if (context.req.cookies.access_token === undefined) {
     return {
       props: {
+        userid: "sss",
         nickname: "NULL",
         isLoggedIn: false,
       },
@@ -74,6 +71,7 @@ export const getServerSideProps: GetServerSideProps<UserData> = async (
   const res_json = await response.json()
   return {
     props: {
+      userid: "sss",
       nickname: res_json["nickname"],
       isLoggedIn: true,
     },

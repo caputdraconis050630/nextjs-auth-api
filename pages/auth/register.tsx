@@ -1,9 +1,9 @@
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form } from "semantic-ui-react"
 
 export default function Register() {
   return (
     <div style={{ padding: "100px 0", textAlign: "center" }}>
-      <Form action="api/auth/register" method="POST">
+      <Form action="/api/auth/register" method="POST">
         <Form.Field inline>
           <input placeholder="ID" name="userid" required={true} />
         </Form.Field>
@@ -34,5 +34,5 @@ export default function Register() {
         <Button color="blue">Register</Button>
       </Form>
     </div>
-  );
+  )
 }

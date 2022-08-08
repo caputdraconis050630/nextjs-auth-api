@@ -4,39 +4,39 @@
 */
 
 export type ChangeNickname = {
-  userid: string;
-  nickname: string;
-};
+  userid: string
+  nickname: string
+}
 
-import { NextApiRequest, NextApiResponse } from "next";
-import pc from "../../../lib/backend/prismaClient"; // From PIE
-import * as yup from "yup";
+import { NextApiRequest, NextApiResponse } from "next"
+import pc from "../../../lib/backend/prismaClient" // From PIE
+import * as yup from "yup"
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
-  const { userId } = req.query;
-
+  const { userId } = req.query
+  // console.log(req.method)
   switch (req.method) {
     case "GET":
       const user_data = await pc.user.findFirst({
         where: {
           userid: userId as string,
         },
-      });
-      return res.status(200).send(user_data);
+      })
+      return res.status(200).send(user_data)
     case "POST":
-      const formdata = await validateChangeNicknameBody(req.body);
-      pc.user.update({
+      const formdata = await validateChangeNicknameBody(req.body)
+      await pc.user.update({
         data: {
           nickname: formdata.nickname,
         },
         where: {
-          userid: formdata.userid,
+          userid: userId as string,
         },
-      });
-      return res.status(200).end("Nickname has changed successfully");
+      })
+      return res.status(200).end("Nickname has changed successfully")
     default:
       // api/users/[userId]에 GET, POST가 아닌 다른 방식으로는 접근 불가능
-      return res.status(405).end(`Method ${req.method} Is Not Allowed.`);
+      return res.status(405).end(`Method ${req.method} Is Not Allowed.`)
   }
 }
 
@@ -46,5 +46,5 @@ async function validateChangeNicknameBody(body: any): Promise<ChangeNickname> {
       userid: yup.string().required(),
       nickname: yup.string().max(20).required(),
     })
-    .validate(body);
+    .validate(body)
 }

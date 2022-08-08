@@ -12,7 +12,7 @@ import {
 export default function Login() {
   return (
     <div style={{ padding: "100px 0", textAlign: "center" }}>
-      <Form action="api/auth/login" method="POST">
+      <Form action="/api/auth/login" method="POST">
         <Form.Field inline>
           <input placeholder="ID" name="userid" required={true} />
         </Form.Field>
