@@ -10,13 +10,14 @@ import {
 } from "semantic-ui-react"
 import login from "./api/auth/login"
 import { GetServerSideProps } from "next"
+import { withWrapper } from "../src/backend/middleware/withWrapper"
 
 type UserData = {
   nickname: string
   isLoggedIn: Boolean
 }
 
-export default function Home({ nickname, isLoggedIn }: UserData) {
+export function Home({ nickname, isLoggedIn }: UserData) {
   if (!isLoggedIn) {
     return (
       <div style={{ padding: "100px 0", textAlign: "center" }}>
