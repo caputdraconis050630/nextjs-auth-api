@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 import {
   Button,
   Form,
@@ -7,7 +7,7 @@ import {
   Image,
   Message,
   Segment,
-} from "semantic-ui-react";
+} from "semantic-ui-react"
 
 export default function Login() {
   return (
@@ -34,5 +34,5 @@ export default function Login() {
         </Link>
       </Form>
     </div>
-  );
+  )
 }
