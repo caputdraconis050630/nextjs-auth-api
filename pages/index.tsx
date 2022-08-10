@@ -17,7 +17,7 @@ type UserData = {
   isLoggedIn: Boolean
 }
 
-export function Home({ nickname, isLoggedIn }: UserData) {
+export default function Home({ nickname, isLoggedIn }: UserData) {
   if (!isLoggedIn) {
     return (
       <div style={{ padding: "100px 0", textAlign: "center" }}>

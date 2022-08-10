@@ -28,7 +28,7 @@ export default function Login() {
         <Button color="blue" type="submit">
           Login
         </Button>
-        <Link href="/register">
+        <Link href="/auth/register">
           <Button color="blue" type="submit">
             Register
           </Button>
